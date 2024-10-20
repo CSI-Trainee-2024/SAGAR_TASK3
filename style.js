@@ -8,13 +8,18 @@ let isGoingRight = true
 let direction = 1
 let results = 0
 
+// Load results from local storage
+if (localStorage.getItem("results")) {
+    results = parseInt(localStorage.getItem("results"), 10)
+    resultDisplay.innerHTML = results
+}
+
 for (let i = 0; i < width * width; i++) {
     const square = document.createElement("div")
     grid.appendChild(square)
 }
 
 const squares = Array.from(document.querySelectorAll(".grid div"))
-
 
 const alienInvaders = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
@@ -116,6 +121,9 @@ function shoot(e) {
             aliensRemoved.push(alienRemoved)
             results++
             resultDisplay.innerHTML = results
+
+            // Save results to local storage
+            localStorage.setItem("results", results)
         }
     }
 
